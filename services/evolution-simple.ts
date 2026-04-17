@@ -10,6 +10,7 @@ async function evolutionFetch(endpoint: string, options: RequestInit = {}) {
     headers: {
       'apikey': API_KEY!,
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true',
       ...options.headers,
     },
   })

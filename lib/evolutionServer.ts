@@ -35,6 +35,7 @@ export async function evoFetch(
     headers: {
       apikey: config.key,
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true',
       ...(init.headers ?? {}),
     },
   })
