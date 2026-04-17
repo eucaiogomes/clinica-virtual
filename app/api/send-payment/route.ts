@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     .eq('user_id', user.id)
     .single()
 
-  if (!settings?.pix_key) {
+  if (!settings || !settings.pix_key) {
     return NextResponse.json({ error: 'Chave Pix não configurada. Vá em Automações → Cobrança.' }, { status: 400 })
   }
 

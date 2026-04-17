@@ -1,5 +1,5 @@
-const BASE_URL = process.env.EVOLUTION_BASE_URL
-const API_KEY = process.env.EVOLUTION_API_KEY
+const BASE_URL = process.env.EVOLUTION_BASE_URL || 'http://localhost:8080'
+const API_KEY = process.env.EVOLUTION_API_KEY || ''
 
 /**
  * Faz requisição para Evolution API
