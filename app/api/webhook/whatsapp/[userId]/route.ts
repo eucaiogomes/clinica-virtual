@@ -6,11 +6,11 @@ const conversationHistory: Record<string, { role: string; content: string }[]> =
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     const body = await req.json()
-    const { userId } = params
+    const { userId } = await params
 
     // ── Parse Evolution API webhook ──────────────────
     const data = body.data ?? body
