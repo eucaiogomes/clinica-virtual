@@ -59,3 +59,66 @@ export interface Goal {
   end_date: string
   created_at: string
 }
+
+// ──────────────────────────────────────────────────────────────
+// Exercícios Terapêuticos
+// ──────────────────────────────────────────────────────────────
+
+export interface ResultTier {
+  title: string
+  text: string
+  items: { icon: string; title: string; desc: string }[]
+}
+
+export interface Template {
+  id: string
+  title: string
+  description: string | null
+  category: string | null
+  duration_minutes: number
+  result_config: { low: ResultTier; mid: ResultTier; high: ResultTier } | null
+  created_at: string
+  template_questions?: TemplateQuestion[]
+}
+
+export interface TemplateQuestion {
+  id: string
+  template_id: string
+  type: 'multiple_choice' | 'text'
+  question: string
+  options: string[] | null
+  order: number
+  created_at: string
+}
+
+export interface ProfessionalForm {
+  id: string
+  template_id: string
+  user_id: string
+  slug: string
+  cta_url: string
+  cta_label: string
+  created_at: string
+  templates?: Template
+  responses?: { count: number }[]
+}
+
+export interface FormResponse {
+  id: string
+  professional_form_id: string
+  patient_name: string | null
+  patient_email: string | null
+  score_pct: number | null
+  created_at: string
+  response_answers?: ResponseAnswer[]
+}
+
+export interface ResponseAnswer {
+  id: string
+  response_id: string
+  question_id: string
+  answer: string
+  answer_index: number
+  created_at: string
+  template_questions?: TemplateQuestion
+}
