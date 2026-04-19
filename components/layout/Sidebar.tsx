@@ -16,6 +16,8 @@ import {
   LogOut,
   MessageSquare,
   Zap,
+  BookHeart,
+  FileText,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { getInitials } from '@/lib/utils'
@@ -29,8 +31,10 @@ const navItems = [
   { href: '/despesas',   icon: Receipt,         label: 'Despesas',   group: 'main' },
   { href: '/relatorios', icon: BarChart3,       label: 'Relatórios', group: 'main' },
   { href: '/metas',      icon: Target,          label: 'Metas',      group: 'main' },
-  { href: '/whatsapp',    icon: MessageSquare, label: 'WhatsApp',    group: 'tools' },
-  { href: '/automacoes',  icon: Zap,           label: 'Automações',  group: 'tools' },
+  { href: '/whatsapp',          icon: MessageSquare, label: 'WhatsApp',            group: 'tools' },
+  { href: '/automacoes',        icon: Zap,           label: 'Automações',          group: 'tools' },
+  { href: '/exercicios',        icon: BookHeart,     label: 'Exercícios',          group: 'exercises' },
+  { href: '/meus-formularios',  icon: FileText,      label: 'Meus Formulários',    group: 'exercises' },
 ]
 
 export function Sidebar() {
@@ -114,6 +118,29 @@ export function Sidebar() {
               <Icon className={`w-4 h-4 ${isActive ? 'text-green-600' : 'text-slate-400'}`} />
               {label}
               {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-green-500" />}
+            </Link>
+          )
+        })}
+
+        {/* Divider + Exercícios */}
+        <div className="pt-3 pb-1">
+          <p className="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Exercícios</p>
+        </div>
+        {navItems.filter((n) => n.group === 'exercises').map(({ href, icon: Icon, label }) => {
+          const isActive = pathname.startsWith(href)
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                isActive
+                  ? 'bg-amber-50 text-amber-800'
+                  : 'text-slate-600 hover:bg-amber-50 hover:text-amber-800'
+              }`}
+            >
+              <Icon className={`w-4 h-4 ${isActive ? 'text-amber-600' : 'text-slate-400'}`} />
+              {label}
+              {isActive && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-amber-500" />}
             </Link>
           )
         })}

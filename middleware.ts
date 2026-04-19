@@ -30,8 +30,10 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
   const isAuthRoute = path === '/login' || path === '/cadastro'
 
-  // Protege rotas de API do webhook — não redirecionar
+  // Rotas públicas — não exigem autenticação
   if (path.startsWith('/api/webhook')) return supabaseResponse
+  if (path.startsWith('/f/')) return supabaseResponse
+  if (path.startsWith('/api/forms/submit')) return supabaseResponse
 
   if (!user && !isAuthRoute) {
     return NextResponse.redirect(new URL('/login', request.url))
